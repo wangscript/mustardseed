@@ -1,0 +1,49 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+			     http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd"
+	 version="2.5">
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!--Spring MVC Servlet配置-->
+  <servlet>
+    <servlet-name>SpringMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    
+    <!--Spring MVC 配置文件位置-->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring.xml</param-value>
+    </init-param>
+
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <!--映射路径配置-->
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
+  <!--UTF-8编码设置-->
+  <filter>   
+    <filter-name>UTF8-Encoding</filter-name>   
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>   
+    <init-param>   
+      <param-name>encoding</param-name>   
+      <param-value>utf8</param-value>   
+    </init-param>
+  </filter>   
+  <filter-mapping>   
+    <filter-name>UTF8-Encoding</filter-name>   
+    <url-pattern>/*</url-pattern>   
+  </filter-mapping>  
+
+  <!--错误页面设置-->
+  <!--
+  <error-page>
+    <error-code>404</error-code>
+    <location>/404.html</location>
+  </error-page>
+  -->
+</web-app>

@@ -1,0 +1,119 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!--根项目定义-->
+  <parent>
+    <groupId>org.mustardseed</groupId>
+    <artifactId>ROOT</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+  
+  <!--项目说明-->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.mustardseed.demo</groupId>
+  <artifactId>MVCDemo</artifactId>
+  <packaging>war</packaging>
+  <!--版本信息-->
+  <version>1.0-SNAPSHOT</version>
+  <!--项目名称-->
+  <name>MVCBatis Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+
+  <!--构建说明-->
+  <build>
+    <!--生成包名-->
+    <finalName>MVCDemo</finalName>
+  </build>
+  
+  <!--依赖说明-->
+  <dependencies>
+    <!--相关模块依赖-->
+    <dependency>
+      <groupId>org.mustardseed.utils</groupId>
+      <artifactId>CommonUtils</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mustardseed.mvc</groupId>
+      <artifactId>MVCSupport</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mustardseed.filemanager</groupId>
+      <artifactId>FileManager</artifactId>
+    </dependency>
+    <!--Spring Web MVC 依赖-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--JSP 标签依赖-->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!--校验注解依赖-->
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+    </dependency>
+
+    <!--对servlet底层访问-->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <!--文件上传支持-->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    
+    <!--JSON支持依赖-->
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-core-asl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+    </dependency>
+
+    <!--日志文件依赖-->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+    </dependency>
+    
+    <!--MyBatis依赖-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+    </dependency>
+
+    <!--数据源配置-->
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+    </dependency>
+  </dependencies>
+</project>

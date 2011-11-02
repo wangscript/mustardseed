@@ -1,0 +1,5 @@
+\section{LocalFileManager实现}
+一个本地文件存储的FileManager实现。在使用时，需要配置location 与 host
+两个属性。location为文件所保存的本地目录。host一般为指向location的服务器
+URL地址。在配置location与host时，由于这两个都是目录，因此需要在末尾加上
+``/''符号。在LocalFileManager中，一般以``/''结尾的为目录，否则为文件。

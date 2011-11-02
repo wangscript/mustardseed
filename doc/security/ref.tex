@@ -1,0 +1,37 @@
+\section{访问来源控制}
+该模块利用Java的反射机制，判断其Web请求的来源是否合法。可用于低强度的
+防盗链，跨站攻击等。
+
+\subsection{Annotation}
+来源控制的Annotation在org.mustardseed.security.annotation包中。
+\begin{verbatim}
+public @interface WebRefStamp {
+    public String[] value() default {};
+    public boolean passWhenNull() default true;
+    public RequestMethod[] method() 
+        default {RequestMethod.GET, RequestMethod.POST};
+    public String error() default "";
+}
+\end{verbatim}
+
+\begin{description}
+\item[value] 允许的来源url列表名，可选择多个列表。
+\item[passWhenNull] 设置是否允许未知来源的链接请求。
+\item[RequestMethod] 允许的请求方法。
+\item[error] 自定义错误代码。
+\end{description}
+
+\subsection{安全模块}
+来源控制的安全模块位于org.mustardseed.security包中的 WebCtrlRefResolver
+在使用时只需在Spring中用IoC设置如下的几个参数即可。
+\begin{description}
+\item[urlDict] 这个参数为一个map对象，定义不同名字的URL列表。在列表中的URL
+将被用于判断链接来源的合法性。
+\item[isMatchProtocol] 设置是否判断URL协议。如http、ftp等。(可选)
+\item[isMatchHost] 设置是否判断主机地址。(可选)
+\item[isMatchPort] 设置是否判断URL中的端口号。(可选)
+\end{description}
+
+在设置中，默认情况下三个可选项都为``false''，通常设置isMatchHost为``true''即可。
+若都为``false''则对于URL限制的访问控制将失效。在实际使用中urlDict可以设置多个
+不同名的列表，针对不同的场合，采用不同的列表进行URL访问控制。

@@ -1,0 +1,46 @@
+\section{基于角色的Web安全模块}
+该模块利用Java的反射机制，对来自Web的请求，在Controller层做基于角色的
+访问控制。
+
+\subsection{Annotation}
+角色控制的Annotation在org.mustardseed.security.annotation包中。
+\begin{verbatim}
+public @interface RoleAuthStamp {
+    public String[] value() default {};
+    public String[] except() default {};
+    public String error() default "";
+}
+\end{verbatim}
+
+\begin{description}
+\item[value] 由角色字符串构成的一个数组，在数组中的角色将被认为合法。
+\item[except] 由角色字符串构成的一个数组，在数组中的角色将被认为非法。
+\item[error] 一个字符串类型的自定义错误代码。
+\end{description}
+
+自定义错误代码在SprintMVC 与 Struts2中的意义是不同的。在SpringMVC
+中，错误代码将被添加至AuthResult中，而在Struts2中，将被作为请求为
+非法请求之后，所跳转的Result名。
+
+\subsection{安全模块}
+角色控制的安全模块位于org.mustardseed.security包中的 WebCtrlRoleResolver
+若要让其正常使用只需在Spring中用IoC设置roleAuthBean 和 defaultErrorCode 
+两个参数即可。
+\begin{description}
+\item[roleAuthBean]是一个实现 RoleAuthenticationBean 接口的用户自定义对象，
+用于完成用户访问合法性的判断。
+\item[defaultErrorCode]是一个字符串类型，当在
+类与成员函数上都未设置error时，作为默认error返回值使用。
+\end{description}
+
+\subsection{角色访问控制实现}
+RoleAuthenticationBean 是用户自定义实现的一个接口。用户只需要实现 getAuthRoles
+ 和 checkAuth 两个成员方法即可。
+\begin{description}
+\item[getAuthRoles] 返回所有有效的角色字符串集合。即角色集合的全集。
+\item[checkAuth] 接受一个当前请求的合法角色集合，与NativeWebRequest 对象。
+用户可在其中根据合法用户集合，与从NativeWebRequest中获得的session信息等，
+来判断该请求是否合法。若合法则回返``true''，不然返回``false''
+\end{description}
+
+

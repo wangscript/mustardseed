@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!--根项目定义-->
+  <parent>
+    <groupId>org.mustardseed</groupId>
+    <artifactId>ROOT</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+  
+  <!--项目说明-->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.mustardseed.origin</groupId>
+  <artifactId>StrutsBatis</artifactId>
+  <packaging>war</packaging>
+  <!--版本信息-->
+  <version>1.0-SNAPSHOT</version>
+  <!--项目名称-->
+  <name>StrutsBatis Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+  <!--构建说明-->
+  <build>
+    <finalName>StrutsBatis</finalName>
+  </build>
+
+  <!--依赖说明-->
+  <dependencies>
+    <!--Sturts2核心依赖-->
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-core</artifactId>
+      <version>${struts.version}</version>
+    </dependency>
+    
+    <!--Spring注入依赖-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    
+    <!--Spring插件-->
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-spring-plugin</artifactId>
+      <version>${struts.version}</version>
+    </dependency>
+    
+    <!--Struts2注解插件-->
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-convention-plugin</artifactId>
+      <version>${struts.version}</version>
+    </dependency>
+    
+    <!--JSON插件-->
+    <!--
+    <dependency>
+      <groupId>org.apache.struts</groupId>
+      <artifactId>struts2-json-plugin</artifactId>
+      <version>${struts.version}</version>
+    </dependency>
+    -->
+    
+    <!--日志文件依赖-->
+    <!--
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+    </dependency>
+    -->
+    
+    <!--MyBatis依赖-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+    </dependency>
+    
+    <!--数据源配置-->
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+    </dependency>
+
+  </dependencies>
+</project>

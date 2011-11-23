@@ -1,0 +1,59 @@
+\section{Spring MVC的配置和使用}
+由于MVC的实现机制原因，MVC下的配置和使用略微比struts2复杂一点。其中会涉及一些
+MVCSupport的辅助类，用于配置自定义的赋值拦截。MVC中的表单校验结果需要手动处理。
+但是，处理起来并不复杂，你可以只加个判断，然后让mvc返回到错误页面上。
+
+\subsection{MVC的配置}
+由于MVC是Spring的一部分，所以配置只关联一个文件。一套完整的配置需要建立3个
+SpringBean。
+
+以下是spring的配置文件的内容。其中那个HanlerAadaperConfig是本框架用来配置
+MVC中的一个Bean的配置的。在Spring3.1中这个有官方方式解决。而valdator的
+配置就和Struts2中是一样的。剩下的 validatorHandler 则类似于 Struts2 中的
+拦截器的作用。而MethodHanderConfig 则是用来将拦截器绑定到MVC中的Bean。
+
+\begin{verbatim}
+<bean name="validator"
+      class="org.mustardseed.validation.Validator">
+  <property name="scriptPath" value="/script/validator.js"/>
+</bean>
+  
+<bean name="validatorHandler"
+  class="org.mustardseed.validation.spring.ValidationHandler">
+  <property name="validator" ref="validator"/>
+</bean>
+
+<bean class="org.mustardseed.mvc.config.MethodHandlerConfig"/>
+\end{verbatim}
+
+\subsection{Validation的使用}
+
+SpringMVC中的使用也是用注解形式标注。不同于 Struts2 把注解标注在 method 上，
+MVC是将注解标注在参数上。
+
+
+以下是MVC中用于表单处理的成员函数。 标注了 FormValidResult 的 Map 将被赋予
+校验结果，如果为 null 则说明表单处理没有问题。不然其中包含的就是含有错误信息
+的一个Map。
+\begin{verbatim}
+@RequestMapping(value="/validation",
+                method=RequestMethod.POST)
+public ModelAndView 
+  validation(@RequestParam("name")
+               String name,
+             @RequestParam("password")
+               String password,
+             @FormValidResult("userRegisterValid")
+               Map<String, String[]> result) {
+  ModelAndView mav = new ModelAndView();
+  if (result != null) {
+    mav.setViewName("valid");
+    mav.addObject("error", result);
+    mav.addObject("name", name);
+    mav.addObject("password", password);
+  } else {
+    mav.setViewName("redirect:index.do");
+  }
+  return mav;
+}
+\end{verbatim}

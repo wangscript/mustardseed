@@ -22,7 +22,10 @@ import org.mustardseed.filemanager.FileManager;
 import org.mustardseed.filemanager.FileNode;
 import javax.annotation.Resource;
 
-import org.mustardseed.utils.JSONUtils;
+//表单验证
+import org.mustardseed.script.javascript.JSEngine;
+import org.mozilla.javascript.Scriptable;
+import org.mustardseed.validation.FormValidResult;
 
 
 //定义该类为控制器Bean
@@ -174,6 +177,33 @@ public class MainCtrl {
 
 	return mav;
     }
+    
+    //表单验证示例(表单页面显示)
+    @RequestMapping(value="/validation",
+		    method=RequestMethod.GET)
+    public String validation() {
+	return "form";
+    }
+    //表单验证示例(表单处理部分)
+    @RequestMapping(value="/validation",
+		    method=RequestMethod.POST)
+    public ModelAndView validation(@RequestParam("name") String name,
+				   @RequestParam("password") String password,
+				   //保存表单验证结果的Map
+				   @FormValidResult("main") Map result) {
+	ModelAndView mav = new ModelAndView();
+	//如果表单验证失败
+	if (result != null) {
+	    mav.setViewName("form");
+	    mav.addObject("errors", result);
+	    mav.addObject("name", name);
+	    mav.addObject("password", password);
+	} else {
+	    mav.setViewName("redirect:index.do");
+	}
+	return mav;
+    }
+
     @Resource
     public void setFileManager(FileManager fileManager) {
 	this.fileManager = fileManager;

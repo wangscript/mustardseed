@@ -8,6 +8,7 @@ import org.mustardseed.security.AuthError;
 import org.mustardseed.security.AuthResult;
 import org.mustardseed.security.WebCtrlAuthConfiguration;
 import org.mustardseed.security.annotation.RoleAuthStamp;
+import org.mustardseed.mvc.config.CustomMethodHandlerConfig;
 
 /**
  *在MVC中截获Web请求
@@ -27,6 +28,7 @@ import org.mustardseed.security.annotation.RoleAuthStamp;
  *</bean>
  */
 
+@CustomMethodHandlerConfig
 public class WebCtrlAuthHandler 
     implements WebArgumentResolver {
 

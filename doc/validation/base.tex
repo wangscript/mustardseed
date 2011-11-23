@@ -1,0 +1,111 @@
+\section{基础配置介绍}
+该框架能应用于Spring MVC与Struts2中。对于两个不同的框架，配置和使用会有少许不同。
+但是，对于表单验证的脚本实现则没有区别。也就是说，不论你是用Spring MVC还是Struts2
+验证机制的脚本是通用的，配置也基本类似。所以，两者的配置和实现基本可以互换。
+
+\subsection{验证脚本实现}
+Validation验证脚本是用 javascript 实现的。在服务器端可以使用 1.5 标准。
+客户端则由具体浏览器决定。使用者需要把验证规则写在一个 javascript 函数中。该函数
+接收一个以表单数据名为key，该数据的value所组成的数组的一个map。返回也是一个类似
+的map，只是原来用来存放value的数组，变为存放错误信息的数组。对于该脚本的一个特殊
+限制是，不可以使用浏览器相关对象以及其成员函数，并且该脚本必须是一个独立的js脚本
+文件，不可嵌在页面的script标签中。
+
+以下为一个验证脚本的实例。其中， addErrorField 函数是一个自定义函数便于错误信息的
+构建，你可以实现自己的自定义函数。其中 userRegisterValid 就是所要实现的验证脚本
+接口了。只要保证输入和输出结构，内部实现机制可以自由发挥。
+
+\begin{verbatim}
+function addErrorField(obj, name, msg) {
+  if (!obj[name])
+    obj[name] = new Array();
+  obj[name].push(msg);
+}
+
+
+function userRegisterValid(data) {
+  var ret = {};
+
+  if (data["name"][0] == "") {
+    addErrorField(ret, "name", "用户名不能为空");
+
+  } else if (data["name"][0].length < 3 || 
+             data["name"][0].length > 20) {
+    addErrorField(ret,
+                  "name",
+                  "用户名限制在3到20个字符");
+  }
+
+  if (data["password"][0] == "" ||
+      data["password"][1] == "") {
+    addErrorField(ret,
+                  "password",
+                  "密码均不能空");
+  } else if (data["password"][0] != 
+             data["password"][1]) {
+    addErrorField(ret,
+                  "password",
+                  "两个密码必须相同");
+  } else if (data["password"][0].length > 8) {
+    addErrorField(ret,
+                  "password",
+                  "密码必须在8个字符以内");
+  }
+  return ret;
+}
+\end{verbatim}
+
+
+\subsection{客户端脚本实现}
+Validation 在客户端实现了一个 Jquery 的 plugin 。使用时，只需要调用该plugin即可。
+以下为HTML页面内容。核心内容是 formValid 这个 plugin 方法。传入的参数是刚才我们
+实现的那个符合接口要求的校验脚本，返回的是一个带有错误信息的map。
+
+\begin{verbatim}
+<html>
+  <head>
+    <title>Hello World</title>
+    <script src="jquery.min.js"></script>
+    <!-- jquery plugin -->
+    <script src="validation.js"></script>
+    <script src="validator.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#formValid").submit(function(e) {
+          var err = 
+            $("#formValid").formValid(userRegisterValid);
+          if (err) {
+            var msg = ""
+            for (var i in err) {
+              for (var j = 0; j < err[i].length; j += 1)
+                msg += err[i][j] + "<br/>";
+            }
+            $("#validResult").html(msg);
+            return false;
+          }
+          return true;
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="validResult" style="color:red"></div>
+    <form id="formValid" 
+          action="validation.do" 
+          method="post">
+      <div>
+        用户名:<input name="name" type="textfield"/>
+      </div>
+      <div>
+        密码:<input name="password" type="password"/>
+      </div>
+      <div>
+        密码:<input name="password" type="password"/>
+      </div>
+        <input type="submit"/>
+      </div>
+    </form>
+  </body> 
+</html>
+\end{verbatim}
+

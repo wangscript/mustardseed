@@ -65,5 +65,8 @@
 	</div>
       </c:forEach>
     </div>
+    <div>
+      <a href="validation.do">统一表单验证</a>
+    </div>
   </body> 
 </html>

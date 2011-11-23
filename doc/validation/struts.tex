@@ -1,0 +1,41 @@
+\section{Struts下的配置和使用}
+在 Struts2 下，采用的是拦截器实现。拦截器将根据脚本进行数据校验，并按照Struts的默认
+表单校验方式处理错误信息，即将错误信息内容丢给实现了 ValidationAware 接口的 Action
+然后返回 INPUT 的 Result 。之后在服务器端的表单验证处理逻辑就和默认的验证逻辑基本相同。
+
+\subsection{拦截器配置}
+拦截器的配置分成两步，一个是配置Struts2的内容拦截器，另一个是用于实际处理表单校验的
+SpringBean。
+
+以下是Struts2拦截器的配置。
+\begin{verbatim}
+<interceptors>
+  <interceptor name="validationInterceptor"
+    class="org.mustardseed.validation.struts.ValidationHandler"/>
+  <interceptor-stack name="mustardDefaultStack">
+    <interceptor-ref name="validationInterceptor"/>
+    <interceptor-ref name="defaultStack"/>
+  </interceptor-stack>
+</interceptors>
+<default-interceptor-ref name="mustardDefaultStack"/>
+\end{verbatim}
+
+以下是Spring相关的配置，其中 validator.js 是你存放所有校验函数的js脚本的服务器路径。
+\begin{verbatim}
+<bean name="validator"
+      class="org.mustardseed.validation.Validator">
+  <property name="scriptPath" value="validator.js"/>
+</bean>
+\end{verbatim}
+
+\subsection{Validation的使用}
+
+在Struts2中使用的时候，只需要在你响应的method上，加上一个注解即可。下面是实例，
+其中的 userRegisterValid 为你页面上用来校验表单的校验函数名。请确保两个名字
+相同，不然校验结果将会不一致。
+\begin{verbatim}
+@FormValidResult("userRegisterValid")
+public String execute() {
+  return SUCCESS;
+}
+\end{verbatim}

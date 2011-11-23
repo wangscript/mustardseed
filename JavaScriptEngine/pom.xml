@@ -1,39 +1,28 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <!--根项目定义-->
-  <parent>
-    <groupId>org.mustardseed</groupId>
-    <artifactId>ROOT</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <relativePath>..</relativePath>
-  </parent>
-  
-  <!--项目说-->
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.mustardseed.security</groupId>
-  <artifactId>Security</artifactId>
+  <parent>
+    <artifactId>ROOT</artifactId>
+    <groupId>org.mustardseed</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>org.mustardseed.script</groupId>
+  <artifactId>JavaScriptEngine</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Security</name>
+  <name>JavaScriptEngine</name>
   <url>http://maven.apache.org</url>
   
-  <!--依赖说明-->
   <dependencies>
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
+      <artifactId>spring-beans</artifactId>
       <version>${spring.version}</version>
-      <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-	<groupId>org.mustardseed.mvc</groupId>
-	<artifactId>MVCSupport</artifactId>
+      <groupId>org.mozilla</groupId>
+      <artifactId>rhino</artifactId>
+      <version>1.7R3</version>
     </dependency>
   </dependencies>
 </project>

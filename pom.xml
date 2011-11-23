@@ -61,6 +61,9 @@
     <module>CommonUtils</module>
     <module>MVCSupport</module>
     <module>FileManager</module>
+    <module>JavaScriptEngine</module>
+    <module>Validation</module>
+    <module>ValidationStruts</module>
 
     <module>MVCDemo</module>
   </modules>
@@ -108,6 +111,21 @@
       <dependency>
 	<groupId>org.mustardseed.filemanager</groupId>
 	<artifactId>FileManager</artifactId>
+	<version>${project.version}</version>
+      </dependency>
+      <dependency>
+	<groupId>org.mustardseed.script</groupId>
+	<artifactId>JavaScriptEngine</artifactId>
+	<version>${project.version}</version>
+      </dependency>
+      <dependency>
+	<groupId>org.mustardseed.validation</groupId>
+	<artifactId>Validation</artifactId>
+	<version>${project.version}</version>
+      </dependency>
+      <dependency>
+	<groupId>org.mustardseed.validation</groupId>
+	<artifactId>ValidationStruts</artifactId>
 	<version>${project.version}</version>
       </dependency>
       <!--javax.servlet-->
@@ -180,5 +198,4 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
 </project>

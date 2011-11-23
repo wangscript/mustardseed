@@ -1,23 +1,20 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <!--根项目定义-->
-  <parent>
-    <groupId>org.mustardseed</groupId>
-    <artifactId>ROOT</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <relativePath>..</relativePath>
-  </parent>
-  
-  <!--项目说-->
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.mustardseed.security</groupId>
-  <artifactId>Security</artifactId>
+  <parent>
+    <artifactId>ROOT</artifactId>
+    <groupId>org.mustardseed</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>org.mustardseed.validation</groupId>
+  <artifactId>Validation</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Security</name>
+  <name>Validation</name>
   <url>http://maven.apache.org</url>
-  
-  <!--依赖说明-->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.springframework</groupId>
@@ -29,6 +26,10 @@
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mustardseed.script</groupId>
+      <artifactId>JavaScriptEngine</artifactId>
     </dependency>
 
     <dependency>

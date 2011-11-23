@@ -41,6 +41,14 @@
       <groupId>org.mustardseed.filemanager</groupId>
       <artifactId>FileManager</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.mustardseed.script</groupId>
+      <artifactId>JavaScriptEngine</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mustardseed.validation</groupId>
+      <artifactId>Validation</artifactId>
+    </dependency>
     <!--Spring Web MVC 依赖-->
     <dependency>
       <groupId>org.springframework</groupId>

@@ -1,0 +1,1 @@
+mustardseed是一系列webapp相关的轻量级通用模块集。主要是基于Spring的IoC进行配置。其目的是用于代码的重用，减少日常开发中不必要的重复工作。目前，的模块可在struts2和spring mvc下使用，配置类似。
